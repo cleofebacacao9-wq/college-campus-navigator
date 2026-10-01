@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talisay City College | Announcements</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        /* HEADER */
+        header {
+            background: #0b3d91;
+            color: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+       .logo img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+}
+
+        .logo h1 {
+            font-size: 21px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(rgba(11,61,145,0.88), rgba(11,61,145,0.88)),
+                        url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        .hero h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        /* CONTENT */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 45px auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            color: #0b3d91;
+            font-size: 30px;
+        }
+
+        .section-title p {
+            color: #666;
+            margin-top: 8px;
+        }
+
+        /* ANNOUNCEMENT */
+        .announcement {
+            background: white;
+            border-left: 6px solid #0b3d91;
+            padding: 22px;
+            margin-bottom: 18px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .announcement h3 {
+            color: #0b3d91;
+            margin-bottom: 8px;
+        }
+
+        .date {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        /* EVENTS */
+        .events {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-date {
+            background: #0b3d91;
+            color: white;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .event-date .month {
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .event-date .day {
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .event-info {
+            padding: 20px;
+        }
+
+        .event-info h3 {
+            color: #0b3d91;
+            margin-bottom: 10px;
+        }
+
+        .event-info p {
+            color: #555;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .event-info .venue {
+            margin-top: 12px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        /* IMPORTANT NOTICE */
+        .notice {
+            background: #fff3cd;
+            border: 1px solid #ffe69c;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        .notice h3 {
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0b3d91;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 13px;
+            margin: 5px;
+        }
+  /* MOBILE */
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 7px;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .hero {
+                padding: 55px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+    <div class="logo">
+
+        <img src="tcclogo.png.png" alt="Talisay City College">
+
+        <div>
+            <h1>Talisay City College</h1>
+            <p>Student Information & Announcements</p>
+        </div>
+
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#announcements">Announcements</a>
+        <a href="#events">Events</a>
+    </nav>
+</header>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <h2>Welcome to Talisay City College</h2>
+        <p>Stay updated with school announcements and upcoming events.</p>
+    </section>
+
+
+    <!-- ANNOUNCEMENTS -->
+    <section class="container" id="announcements">
+
+        <div class="section-title">
+            <h2>📢 Announcements</h2>
+            <p>Latest updates for students</p>
+        </div>
+
+        <div class="announcement">
+            <h3>Enrollment and Registration Reminder</h3>
+            <p class="date">Posted: December 2026</p>
+            <p>
+                Students are reminded to check their enrollment requirements
+                and complete the necessary registration procedures before the
+                scheduled deadline.
+            </p>
+        </div>
+
+        <div class="announcement">
+            <h3>Holiday Break Advisory</h3>
+            <p class="date">Posted: December 2026</p>
+            <p>
+                Students are encouraged to check their class schedules and
+                official school announcements regarding the holiday break.
+            </p>
+        </div>
+
+        <div class="announcement">
+            <h3>New Year Student Activities</h3>
+            <p class="date">Posted: January 2027</p>
+            <p>
+                Students may look forward to various academic and student
+                activities as the new semester begins.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- EVENTS -->
+    <section class="container" id="events">
+
+        <div class="section-title">
+            <h2>📅 Upcoming Events</h2>
+            <p>Sample events for the school website project</p>
+        </div>
+
+        <div class="events">
+
+            <!-- EVENT 1 -->
+            <div class="event-card">
+                <div class="event-date">
+                    <div class="month">November</div>
+                    <div class="day">15</div>
+                    <div>2026</div>
+                </div>
+
+                <div class="event-info">
+                    <h3>Student Leadership Seminar</h3>
+                    <p>
+                        A seminar designed to help students develop leadership,
+                        teamwork, and communication skills.
+                    </p>
+
+                    <p class="venue">
+                        📍 TCC Activity Center
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- EVENT 2 -->
+            <div class="event-card">
+                <div class="event-date">
+                    <div class="month">December</div>
+                    <div class="day">05</div>
+                    <div>2026</div>
+                </div>
+
+                <div class="event-info">
+                    <h3>College Christmas Celebration</h3>
+                    <p>
+                        A festive student gathering featuring activities,
+                        performances, games, and fellowship.
+                    </p>
+
+                    <p class="venue">
+                        📍 School Grounds
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- EVENT 3 -->
+            <div class="event-card">
+                <div class="event-date">
+                    <div class="month">December</div>
+                    <div class="day">18</div>
+                    <div>2026</div>
+                </div>
+
+                <div class="event-info">
+                    <h3>Year-End Student Activity</h3>
+                    <p>
+                        A year-end activity celebrating students' achievements
+                        and experiences throughout the year.
+                    </p>
+
+                    <p class="venue">
+                        📍 TCC Campus
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- EVENT 4 -->
+            <div class="event-card">
+                <div class="event-date">
+                    <div class="month">January</div>
+                    <div class="day">05</div>
+                    <div>2027</div>
+                </div>
+<div class="event-info">
+                    <h3>Welcome Back Students</h3>
+                    <p>
+                        Welcome-back activity for students as classes and
+                        academic activities resume for the new year.
+                    </p>
+
+                    <p class="venue">
+                        📍 TCC Campus
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- EVENT 5 -->
+            <div class="event-card">
+                <div class="event-date">
+                    <div class="month">January</div>
+                    <div class="day">12</div>
+                    <div>2027</div>
+                </div>
+
+                <div class="event-info">
+                    <h3>Student Orientation</h3>
+                    <p>
+                        An orientation introducing students to important
+                        school reminders, activities, and academic guidelines.
+                    </p>
+
+                    <p class="venue">
+                        📍 TCC Activity Center
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- EVENT 6 -->
+            <div class="event-card">
+                <div class="event-date">
+                    <div class="month">January</div>
+                    <div class="day">22</div>
+                    <div>2027</div>
+                </div>
+
+                <div class="event-info">
+                    <h3>Student Skills Workshop</h3>
+                    <p>
+                        A workshop focused on improving students' technical,
+                        digital, and communication skills.
+                    </p>
+
+                    <p class="venue">
+                        📍 TCC Computer Laboratory
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- NOTICE -->
+        <div class="notice">
+            <h3>⚠️ Important Notice</h3>
+            <p>
+                The events and announcements displayed on this page are
+                sample content created for a website project. Students should
+                refer to the official Talisay City College channels for
+                actual schedules and announcements.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p><strong>Talisay City College</strong></p>
+        <p>Student Information & Announcements Website</p>
+        <p>© 2026 TCC Student Web Project</p>
+    </footer>
+
+</body>
+</html>

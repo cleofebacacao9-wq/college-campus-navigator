@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TCC School Calendar 2026-2027</title>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 30px;
+        font-family: Arial, sans-serif;
+        background: white;
+        color: #222;
+    }
+
+    .calendar-page {
+        width: 100%;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    /* HEADER */
+    .header {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .header h1 {
+        font-size: 18px;
+        margin: 3px 0;
+    }
+
+    .header h2 {
+        font-size: 15px;
+        margin: 3px 0;
+    }
+
+    .header p {
+        margin: 3px 0;
+        font-size: 12px;
+    }
+
+   .header-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+}
+
+.header-logos img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+}
+
+.school-title {
+    text-align: center;
+}
+
+    /* MAIN 3 COLUMNS */
+    .main-calendar {
+        display: grid;
+        grid-template-columns: 1fr 1.35fr 1fr;
+        gap: 6px;
+        align-items: start;
+    }
+
+    /* MONTH */
+    .month {
+        border: 1px solid #333;
+        margin-bottom: 6px;
+    }
+
+    .month-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 12px;
+        padding: 3px;
+        border-bottom: 1px solid #333;
+        background: #f4f4f4;
+    }
+
+    .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .day-name,
+    .date {
+        border-right: 1px solid #999;
+        border-bottom: 1px solid #999;
+        min-height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+    }
+
+    .day-name {
+        font-weight: bold;
+        background: #eee;
+        min-height: 20px;
+    }
+
+    .date:nth-child(7n) {
+        border-right: none;
+    }
+
+    .empty {
+        background: white;
+    }
+
+    /* COLORS */
+    .holiday {
+        background: #a8d878;
+    }
+
+    .exam {
+        background: #e889a8;
+    }
+
+    .vacation {
+        background: #6fb5c8;
+    }
+
+    .no-class {
+        background: #d95757;
+        color: white;
+    }
+
+    .school-day {
+        background: white;
+    }
+
+    .start-class {
+        background: #e27d52;
+    }
+
+    .end-class {
+        background: #8880a8;
+        color: white;
+    }
+
+    /* CENTER TABLE */
+    .center-section {
+        border: 1px solid #333;
+        margin-bottom: 6px;
+    }
+
+    .section-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 12px;
+        padding: 5px;
+        border-bottom: 1px solid #333;
+    }
+
+    .center-row {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        border-bottom: 1px solid #999;
+        font-size: 9px;
+        min-height: 23px;
+    }
+
+    .center-row:last-child {
+        border-bottom: none;
+    }
+
+    .center-row div {
+        padding: 4px;
+        border-right: 1px solid #999;
+    }
+
+    .center-row div:last-child {
+        border-right: none;
+    }
+
+    .holiday-title {
+        text-align: center;
+        font-weight: bold;
+        background: #8bc34a;
+        padding: 4px;
+        font-size: 10px;
+    }
+
+    /* SCHOOL DAYS */
+    .school-days {
+        border: 1px solid #333;
+        margin-top: 6px;
+    }
+
+    .school-days-title {
+        text-align: center;
+        font-weight: bold;
+        padding: 4px;
+        font-size: 11px;
+    }
+
+    .school-days table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 9px;
+    }
+
+    .school-days td,
+    .school-days th {
+        border: 1px solid #777;
+        padding: 4px;
+        text-align: center;
+    }
+
+    /* LEGEND */
+    .legend {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 15px;
+        font-size: 10px;
+    }
+
+    .legend-column {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .color-box {
+        width: 20px;
+        height: 13px;
+        border: 1px solid #777;
+    }
+
+    /* PRINT */
+    @media print {
+
+        body {
+            padding: 10px;
+        }
+
+        .calendar-page {
+            max-width: 100%;
+        }
+
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="calendar-page">
+
+
+<!-- HEADER -->
+<div class="header">
+
+    <div class="header-logos">
+
+        <!-- HEADER -->
+<div class="header">
+
+    <div class="header-logos">
+
+        <!-- LEFT LOGO -->
+        <img src="left.png.png" alt="Talisay City College Logo">
+
+        <!-- SCHOOL TITLE -->
+        <div class="school-title">
+            <p>Republic of the Philippines</p>
+            <p>Province of Cebu</p>
+            <p>City of Talisay</p>
+
+            <h1>TALISAY CITY COLLEGE</h1>
+            <h2>SCHOOL CALENDAR</h2>
+
+            <p><b>ACADEMIC YEAR 2026-2027</b></p>
+        </div>
+
+        <!-- RIGHT LOGO -->
+        <img src="right.png.png" alt="Talisay City College Logo">
+
+    </div>
+
+</div>
+    </div>
+
+</div>
+
+
+    <!-- THREE COLUMNS -->
+    <div class="main-calendar">
+
+
+        <!-- LEFT COLUMN -->
+        <div>
+
+            <!-- JULY -->
+            <div class="month">
+                <div class="month-title">JULY 2026</div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date">1</div>
+                    <div class="date">2</div>
+                    <div class="date">3</div>
+                    <div class="date">4</div>
+                    <div class="date no-class">5</div>
+
+                    <div class="date">6</div>
+                    <div class="date">7</div>
+                    <div class="date">8</div>
+                    <div class="date">9</div>
+                    <div class="date">10</div>
+                    <div class="date">11</div>
+                    <div class="date no-class">12</div>
+
+                    <div class="date holiday">13</div>
+                    <div class="date">14</div>
+                    <div class="date">15</div>
+                    <div class="date">16</div>
+                    <div class="date">17</div>
+                    <div class="date">18</div>
+                    <div class="date no-class">19</div>
+
+                    <div class="date">20</div>
+                    <div class="date">21</div>
+                    <div class="date">22</div>
+                    <div class="date">23</div>
+                    <div class="date">24</div>
+                    <div class="date">25</div>
+                    <div class="date no-class">26</div>
+
+                    <div class="date">27</div>
+                    <div class="date">28</div>
+                    <div class="date">29</div>
+                    <div class="date">30</div>
+                    <div class="date">31</div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+
+                </div>
+            </div>
+
+
+            <!-- AUGUST -->
+            <div class="month">
+                <div class="month-title">AUGUST 2026</div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date">1</div>
+                    <div class="date no-class">2</div>
+
+                    <div class="date">3</div>
+                    <div class="date">4</div>
+                    <div class="date">5</div>
+                    <div class="date holiday">6</div>
+                    <div class="date">7</div>
+                    <div class="date">8</div>
+                    <div class="date no-class">9</div>
+
+                    <div class="date">10</div>
+                    <div class="date">11</div>
+                    <div class="date">12</div>
+                    <div class="date">13</div>
+                    <div class="date">14</div>
+                    <div class="date">15</div>
+                    <div class="date no-class">16</div>
+
+                    <div class="date">17</div>
+                    <div class="date">18</div>
+                    <div class="date">19</div>
+                    <div class="date">20</div>
+                    <div class="date">21</div>
+                    <div class="date holiday">21</div>
+                    <div class="date no-class">23</div>
+
+                    <div class="date">24</div>
+                    <div class="date">25</div>
+                    <div class="date">26</div>
+                    <div class="date">27</div>
+                    <div class="date">28</div>
+                    <div class="date">29</div>
+                    <div class="date no-class">30</div>
+
+                    <div class="date holiday">31</div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+
+                </div>
+            </div>
+
+
+            <!-- SEPTEMBER -->
+            <div class="month">
+                <div class="month-title">SEPTEMBER 2026</div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date">1</div>
+                    <div class="date">2</div>
+                    <div class="date holiday">3</div>
+                    <div class="date">4</div>
+                    <div class="date">5</div>
+                    <div class="date">6</div>
+                    <div class="date no-class">7</div>
+
+                    <div class="date">8</div>
+                    <div class="date holiday">9</div>
+                    <div class="date">10</div>
+                    <div class="date">11</div>
+                    <div class="date">12</div>
+                    <div class="date">13</div>
+                    <div class="date no-class">14</div>
+
+                    <div class="date">15</div>
+                    <div class="date">16</div>
+                    <div class="date">17</div>
+                    <div class="date">18</div>
+                    <div class="date">19</div>
+                    <div class="date">20</div>
+                    <div class="date no-class">21</div>
+
+                    <div class="date">22</div>
+                    <div class="date">23</div>
+                    <div class="date">24</div>
+                    <div class="date">25</div>
+                    <div class="date">26</div>
+                    <div class="date">27</div>
+                    <div class="date no-class">28</div>
+
+                    <div class="date">29</div>
+                    <div class="date">30</div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+
+                </div>
+            </div>
+
+
+            <!-- OCTOBER -->
+            <div class="month">
+                <div class="month-title">OCTOBER 2026</div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date">1</div>
+                    <div class="date">2</div>
+                    <div class="date">3</div>
+                    <div class="date no-class">4</div>
+
+                    <div class="date">5</div>
+                    <div class="date">6</div>
+                    <div class="date">7</div>
+                    <div class="date">8</div>
+                    <div class="date">9</div>
+                    <div class="date">10</div>
+                    <div class="date no-class">11</div>
+
+                    <div class="date exam">12</div>
+                    <div class="date exam">13</div>
+                    <div class="date exam">14</div>
+                    <div class="date holiday">15</div>
+                    <div class="date exam">16</div>
+                    <div class="date exam">17</div>
+                    <div class="date no-class">18</div>
+
+                    <div class="date">19</div>
+                    <div class="date">20</div>
+                    <div class="date">21</div>
+                    <div class="date">22</div>
+                    <div class="date">23</div>
+                    <div class="date">24</div>
+                    <div class="date no-class">25</div>
+
+                    <div class="date">26</div>
+                    <div class="date">27</div>
+                    <div class="date">28</div>
+                    <div class="date">29</div>
+                    <div class="date">30</div>
+                    <div class="date">31</div>
+                    <div class="date empty"></div>
+
+                </div>
+            </div>
+
+
+            <!-- NOVEMBER -->
+            <div class="month">
+                <div class="month-title">NOVEMBER 2026</div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date holiday">1</div>
+
+                    <div class="date holiday">2</div>
+                    <div class="date">3</div>
+                    <div class="date">4</div>
+                    <div class="date">5</div>
+                    <div class="date">6</div>
+                    <div class="date">7</div>
+                    <div class="date no-class">8</div>
+
+                    <div class="date">9</div>
+                    <div class="date">10</div>
+                    <div class="date">11</div>
+                    <div class="date">12</div>
+                    <div class="date">13</div>
+                    <div class="date">14</div>
+                    <div class="date no-class">15</div>
+
+                    <div class="date">16</div>
+                    <div class="date">17</div>
+                    <div class="date">18</div>
+                    <div class="date">19</div>
+                    <div class="date">20</div>
+                    <div class="date">21</div>
+                    <div class="date no-class">22</div>
+
+                    <div class="date">23</div>
+                    <div class="date">24</div>
+                    <div class="date">25</div>
+                    <div class="date">26</div>
+                    <div class="date">27</div>
+                    <div class="date">28</div>
+                    <div class="date no-class">29</div>
+
+                    <div class="date holiday">30</div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+
+                </div>
+            </div>
+
+
+            <!-- DECEMBER -->
+            <div class="month">
+                <div class="month-title">DECEMBER 2026</div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date holiday">1</div>
+                    <div class="date holiday">2</div>
+                    <div class="date holiday">3</div>
+                    <div class="date holiday">4</div>
+                    <div class="date holiday">5</div>
+                    <div class="date holiday">6</div>
+                    <div class="date no-class">7</div>
+
+                    <div class="date holiday">8</div>
+                    <div class="date vacation">9</div>
+                    <div class="date vacation">10</div>
+                    <div class="date vacation">11</div>
+                    <div class="date vacation">12</div>
+                    <div class="date vacation">13</div>
+                    <div class="date no-class">14</div>
+
+                    <div class="date vacation">15</div>
+                    <div class="date vacation">16</div>
+                    <div class="date vacation">17</div>
+                    <div class="date vacation">18</div>
+                    <div class="date vacation">19</div>
+                    <div class="date vacation">20</div>
+                    <div class="date no-class">21</div>
+
+                    <div class="date holiday">22</div>
+                    <div class="date holiday">23</div>
+                    <div class="date holiday">24</div>
+                    <div class="date holiday">25</div>
+                    <div class="date holiday">26</div>
+                    <div class="date holiday">27</div>
+                    <div class="date no-class">28</div>
+
+                    <div class="date holiday">29</div>
+                    <div class="date holiday">30</div>
+                    <div class="date holiday">31</div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- CENTER COLUMN -->
+        <div>
+
+            <div class="center-section">
+
+                <div class="section-title">
+                    FIRST SEMESTER 2026-2027
+                </div>
+
+                <div class="center-row">
+                    <div>July 13, 2026</div>
+                    <div class="start-class">Start of Classes</div>
+                </div>
+
+                <div class="center-row">
+                    <div>December 4, 2026</div>
+                    <div class="end-class">End of Classes</div>
+                </div>
+
+                <div class="holiday-title">
+                    HOLIDAYS
+                </div>
+
+                <div class="center-row">
+                    <div>August 6, 2026</div>
+                    <div>Cebu Province Charter Day</div>
+                </div>
+
+                <div class="center-row">
+                    <div>August 21, 2026</div>
+                    <div>Ninoy Aquino Day</div>
+                </div>
+
+                <div class="center-row">
+                    <div>August 31, 2026</div>
+                    <div>National Heroes' Day</div>
+                </div>
+
+                <div class="center-row">
+                    <div>September 9, 2026</div>
+                    <div>Sergio Osmeña Day</div>
+                </div>
+
+                <div class="center-row">
+                    <div>October 15, 2026</div>
+                    <div>City of Talisay Fiesta</div>
+                </div>
+
+                <div class="center-row">
+                    <div>November 1 & 2, 2026</div>
+                    <div>All Saints' & All Souls' Day</div>
+                </div>
+
+                <div class="center-row">
+                    <div>November 30, 2026</div>
+                    <div>Bonifacio Day</div>
+                </div>
+
+                <div class="center-row">
+                    <div>December 8, 2026</div>
+                    <div>Immaculate Conception</div>
+                </div>
+
+                <div class="center-row">
+                    <div>December 21–31, 2026</div>
+                    <div>Christmas Vacation</div>
+                </div>
+
+                <div class="center-row">
+                    <div>December 24 & 25</div>
+                    <div>Christmas Holidays</div>
+                </div>
+
+                <div class="center-row">
+                    <div>December 30 & 31</div>
+                    <div>Rizal Day & Last Day of 2026</div>
+                </div>
+
+            </div>
+
+
+            <div class="center-section">
+
+                <div class="section-title">
+                    SECOND SEMESTER 2026-2027
+                </div>
+
+                <div class="center-row">
+                    <div>January 04, 2027</div>
+                    <div class="start-class">Start of Classes</div>
+                </div>
+
+                <div class="center-row">
+                    <div>May 29, 2027</div>
+                    <div class="end-class">End of Classes</div>
+                </div>
+
+                <div class="holiday-title">
+                    HOLIDAYS
+                </div>
+
+                <div class="center-row">
+                    <div>January 1, 2027</div>
+                    <div>New Year's Day</div>
+                </div>
+
+                <div class="center-row">
+                    <div>January 12, 2027</div>
+                    <div>City of Talisay Charter Day</div>
+                </div>
+
+                <div class="center-row">
+                    <div>February 6, 2027</div>
+                    <div>Chinese New Year's Day</div>
+                </div>
+
+                <div class="center-row">
+                    <div>March 10, 2027</div>
+                    <div>Eid'l Fitr</div>
+                </div>
+
+                <div class="center-row">
+                    <div>March 26, 2027</div>
+                    <div>Good Friday</div>
+                </div>
+
+                <div class="center-row">
+                    <div>March 27, 2027</div>
+                    <div>Black Saturday</div>
+                </div>
+
+                <div class="center-row">
+                    <div>April 9, 2027</div>
+                    <div>The Day of Valor</div>
+                </div>
+
+                <div class="center-row">
+                    <div>May 1, 2027</div>
+                    <div>Labor Day</div>
+                </div>
+
+                <div class="center-row">
+                    <div>May 17, 2027</div>
+                    <div>Eid'l Adha</div>
+                </div>
+
+                <div class="center-row">
+                    <div>June 12, 2027</div>
+                    <div>Independence Day</div>
+                </div>
+
+            </div>
+
+
+            <!-- SCHOOL DAYS -->
+            <div class="school-days">
+
+                <div class="school-days-title">
+                    NO. OF SCHOOL DAYS
+                </div>
+
+                <table>
+
+                    <tr>
+                        <th>1ST SEMESTER</th>
+                        <th>2ND SEMESTER</th>
+                    </tr>
+
+                    <tr>
+                        <td>JULY — 17 Days</td>
+                        <td>JANUARY — 23 Days</td>
+                    </tr>
+
+                    <tr>
+                        <td>AUGUST — 23 Days</td>
+                        <td>FEBRUARY — 23 Days</td>
+                    </tr>
+
+                    <tr>
+                        <td>SEPTEMBER — 25 Days</td>
+                        <td>MARCH — 23 Days</td>
+                    </tr>
+
+                    <tr>
+                        <td>OCTOBER — 26 Days</td>
+                        <td>APRIL — 25 Days</td>
+                    </tr>
+
+                    <tr>
+                        <td>NOVEMBER — 23 Days</td>
+                        <td>MAY — 23 Days</td>
+                    </tr>
+
+                    <tr>
+                        <td>DECEMBER — 5 Days</td>
+                        <td>TOTAL — 117 Days</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT COLUMN -->
+        <div>
+
+            <!-- JANUARY -->
+            <div class="month">
+
+                <div class="month-title">
+                    JANUARY 2027
+                </div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date holiday">1</div>
+                    <div class="date holiday">2</div>
+                    <div class="date no-class">3</div>
+
+                    <div class="date holiday">4</div>
+                    <div class="date">5</div>
+                    <div class="date">6</div>
+                    <div class="date">7</div>
+                    <div class="date">8</div>
+                    <div class="date">9</div>
+                    <div class="date no-class">10</div>
+
+                    <div class="date">11</div>
+                    <div class="date holiday">12</div>
+                    <div class="date">13</div>
+                    <div class="date">14</div>
+                    <div class="date">15</div>
+                    <div class="date">16</div>
+                    <div class="date no-class">17</div>
+
+                    <div class="date">18</div>
+                    <div class="date">19</div>
+                    <div class="date">20</div>
+                    <div class="date">21</div>
+                    <div class="date">22</div>
+                    <div class="date">23</div>
+                    <div class="date no-class">24</div>
+
+                    <div class="date">25</div>
+                    <div class="date">26</div>
+                    <div class="date">27</div>
+                    <div class="date">28</div>
+                    <div class="date">29</div>
+                    <div class="date">30</div>
+                    <div class="date no-class">31</div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FEBRUARY -->
+            <div class="month">
+
+                <div class="month-title">
+                    FEBRUARY 2027
+                </div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date">1</div>
+                    <div class="date">2</div>
+                    <div class="date">3</div>
+                    <div class="date">4</div>
+                    <div class="date">5</div>
+                    <div class="date holiday">6</div>
+                    <div class="date no-class">7</div>
+
+                    <div class="date">8</div>
+                    <div class="date">9</div>
+                    <div class="date">10</div>
+                    <div class="date">11</div>
+                    <div class="date">12</div>
+                    <div class="date">13</div>
+                    <div class="date no-class">14</div>
+
+                    <div class="date exam">15</div>
+                    <div class="date exam">16</div>
+                    <div class="date exam">17</div>
+                    <div class="date exam">18</div>
+                    <div class="date exam">19</div>
+                    <div class="date exam">20</div>
+                    <div class="date exam">21</div>
+
+                    <div class="date exam">22</div>
+                    <div class="date exam">23</div>
+                    <div class="date exam">24</div>
+                    <div class="date exam">25</div>
+                    <div class="date exam">26</div>
+                    <div class="date exam">27</div>
+                    <div class="date no-class">28</div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MARCH -->
+            <div class="month">
+
+                <div class="month-title">
+                    MARCH 2027
+                </div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date">1</div>
+                    <div class="date">2</div>
+                    <div class="date">3</div>
+                    <div class="date">4</div>
+                    <div class="date">5</div>
+                    <div class="date">6</div>
+                    <div class="date no-class">7</div>
+
+                    <div class="date">8</div>
+                    <div class="date">9</div>
+                    <div class="date holiday">10</div>
+                    <div class="date">11</div>
+                    <div class="date">12</div>
+                    <div class="date">13</div>
+                    <div class="date no-class">14</div>
+
+                    <div class="date">15</div>
+                    <div class="date">16</div>
+                    <div class="date">17</div>
+                    <div class="date">18</div>
+                    <div class="date">19</div>
+                    <div class="date">20</div>
+                    <div class="date no-class">21</div>
+
+                    <div class="date">22</div>
+                    <div class="date">23</div>
+                    <div class="date">24</div>
+                    <div class="date holiday">25</div>
+                    <div class="date holiday">26</div>
+                    <div class="date holiday">27</div>
+                    <div class="date no-class">28</div>
+
+                    <div class="date">29</div>
+                    <div class="date">30</div>
+                    <div class="date">31</div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- APRIL -->
+            <div class="month">
+
+                <div class="month-title">
+                    APRIL 2027
+                </div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date">1</div>
+                    <div class="date">2</div>
+                    <div class="date">3</div>
+                    <div class="date no-class">4</div>
+
+                    <div class="date">5</div>
+                    <div class="date">6</div>
+                    <div class="date">7</div>
+                    <div class="date holiday">8</div>
+                    <div class="date">9</div>
+                    <div class="date">10</div>
+                    <div class="date no-class">11</div>
+
+                    <div class="date exam">12</div>
+                    <div class="date exam">13</div>
+                    <div class="date exam">14</div>
+                    <div class="date exam">15</div>
+                    <div class="date exam">16</div>
+                    <div class="date exam">17</div>
+                    <div class="date no-class">18</div>
+
+                    <div class="date">19</div>
+                    <div class="date">20</div>
+                    <div class="date">21</div>
+                    <div class="date">22</div>
+                    <div class="date">23</div>
+                    <div class="date">24</div>
+                    <div class="date no-class">25</div>
+
+                    <div class="date">26</div>
+                    <div class="date">27</div>
+                    <div class="date">28</div>
+                    <div class="date">29</div>
+                    <div class="date">30</div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MAY -->
+            <div class="month">
+
+                <div class="month-title">
+                    MAY 2027
+                </div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date">1</div>
+                    <div class="date no-class">2</div>
+
+                    <div class="date">3</div>
+                    <div class="date">4</div>
+                    <div class="date">5</div>
+                    <div class="date">6</div>
+                    <div class="date">7</div>
+                    <div class="date">8</div>
+                    <div class="date no-class">9</div>
+
+                    <div class="date">10</div>
+                    <div class="date">11</div>
+                    <div class="date">12</div>
+                    <div class="date">13</div>
+                    <div class="date">14</div>
+                    <div class="date">15</div>
+                    <div class="date no-class">16</div>
+
+                    <div class="date">17</div>
+                    <div class="date">18</div>
+                    <div class="date">19</div>
+                    <div class="date">20</div>
+                    <div class="date">21</div>
+                    <div class="date">22</div>
+                    <div class="date no-class">23</div>
+
+                    <div class="date">24</div>
+                    <div class="date">25</div>
+                    <div class="date">26</div>
+                    <div class="date">27</div>
+                    <div class="date">28</div>
+                    <div class="date">29</div>
+                    <div class="date no-class">30</div>
+
+                    <div class="date">31</div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- JUNE -->
+            <div class="month">
+
+                <div class="month-title">
+                    JUNE 2027
+                </div>
+
+                <div class="days">
+
+                    <div class="day-name">M</div>
+                    <div class="day-name">T</div>
+                    <div class="day-name">W</div>
+                    <div class="day-name">Th</div>
+                    <div class="day-name">F</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">S</div>
+
+                    <div class="date empty"></div>
+                    <div class="date">1</div>
+                    <div class="date">2</div>
+                    <div class="date">3</div>
+                    <div class="date">4</div>
+                    <div class="date holiday">5</div>
+                    <div class="date no-class">6</div>
+
+                    <div class="date">7</div>
+                    <div class="date">8</div>
+                    <div class="date">9</div>
+                    <div class="date">10</div>
+                    <div class="date">11</div>
+                    <div class="date holiday">12</div>
+                    <div class="date no-class">13</div>
+
+                    <div class="date">14</div>
+                    <div class="date">15</div>
+                    <div class="date">16</div>
+                    <div class="date">17</div>
+                    <div class="date">18</div>
+                    <div class="date">19</div>
+                    <div class="date no-class">20</div>
+
+                    <div class="date">21</div>
+                    <div class="date">22</div>
+                    <div class="date">23</div>
+                    <div class="date">24</div>
+                    <div class="date">25</div>
+                    <div class="date">26</div>
+                    <div class="date no-class">27</div>
+
+                    <div class="date vacation">28</div>
+                    <div class="date vacation">29</div>
+                    <div class="date vacation">30</div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+                    <div class="date empty"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LEGEND -->
+    <div class="legend">
+
+        <div class="legend-column">
+
+            <div class="legend-item">
+                <div class="color-box school-day"></div>
+                School Days
+            </div>
+
+            <div class="legend-item">
+                <div class="color-box exam"></div>
+                Exam Schedules
+            </div>
+
+            <div class="legend-item">
+                <div class="color-box holiday"></div>
+                National & Local Holidays
+            </div>
+
+        </div>
+
+
+        <div class="legend-column">
+
+            <div class="legend-item">
+                <div class="color-box vacation"></div>
+                Vacation Days
+            </div>
+
+            <div class="legend-item">
+                <div class="color-box start-class"></div>
+                Start of Classes
+            </div>
+
+            <div class="legend-item">
+                <div class="color-box end-class"></div>
+                End of Classes
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
