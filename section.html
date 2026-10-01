@@ -1,0 +1,2635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>College Campus Navigator</title>
+
+    <style>
+
+        /* =========================
+           GENERAL SETTINGS
+        ========================== */
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #222;
+        }
+
+        .browser-frame {
+            width: 96%;
+            max-width: 1400px;
+            min-height: 100vh;
+            margin: 10px auto;
+            border: 2px solid #555;
+            background-color: white;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-bottom: 2px solid #2563eb;
+        }
+
+       .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    background-color: white;
+}
+
+.header-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.header-title {
+    text-align: center;
+}
+
+        header h1 {
+            margin: 5px;
+            font-size: 30px;
+            color: #1e3a8a;
+        }
+
+        header p {
+            margin: 8px;
+            font-size: 18px;
+            color: #444;
+        }
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+    gap: 20px;
+}
+
+.header-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.header-content {
+    text-align: center;
+    color: white;
+}
+
+
+        /* =========================
+           NAVIGATION
+        ========================== */
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 15px;
+            background-color: #2563eb;
+
+            /* FREEZE PANE */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background-color: #f59e0b;
+            color: black;
+        }
+
+
+        /* =========================
+           MAIN LAYOUT
+        ========================== */
+
+        .content {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        main {
+            width: 72%;
+        }
+
+        aside {
+            width: 28%;
+            border: 1px solid #777;
+            padding: 20px;
+            background-color: #f8fafc;
+        }
+
+        section,
+        article,
+        form,
+        .map {
+            border: 1px solid #777;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: white;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #1e3a8a;
+        }
+
+
+        /* =========================
+           CLASS SCHEDULE
+        ========================== */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #555;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f59e0b;
+            color: #111;
+
+            /* FREEZE TABLE HEADER */
+            position: sticky;
+            top: 58px;
+            z-index: 10;
+        }
+
+        td {
+            vertical-align: middle;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f1f5f9;
+        }
+
+        .break-row {
+            background-color: #dbeafe !important;
+            font-weight: bold;
+        }
+
+        .break-row td {
+            text-align: center;
+            color: #1e3a8a;
+        }
+
+        .subject {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .teacher {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .time-column {
+            font-weight: bold;
+            background-color: #eef2ff;
+            white-space: nowrap;
+        }
+
+
+        /* =========================
+           SEARCH FORM
+        ========================== */
+
+        input[type="text"],
+        input[type="email"] {
+            padding: 10px;
+            width: 70%;
+            margin-top: 10px;
+            border: 1px solid #777;
+        }
+
+        input[type="submit"],
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+            background-color: #2563eb;
+            color: white;
+            border-radius: 4px;
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #1e3a8a;
+        }
+
+
+        /* =========================
+           CAMPUS MAP
+        ========================== */
+
+       .campus-map-image {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #777;
+    background-color: #f8fafc;
+}
+
+.campus-map-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* =========================
+   CAMPUS MAP TRACKER
+========================= */
+
+.map-search {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.map-search input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px;
+    border: 1px solid #777;
+    border-radius: 5px;
+}
+
+.map-search button {
+    margin-top: 10px;
+}
+
+.search-result {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+    font-weight: bold;
+}
+
+.search-result.success {
+    display: block;
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+.search-result.error {
+    display: block;
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+/* MAP VIEWPORT */
+
+.campus-map-view {
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #777;
+    background: #eef2f7;
+}
+
+.campus-map-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.campus-map-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+
+    transform-origin: center center;
+    transition: transform 0.8s ease;
+}
+
+/* LOCATION MARKER */
+
+.location-marker {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background: #ef4444;
+    border: 4px solid white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+
+    transform: translate(-50%, -50%);
+    display: none;
+
+    z-index: 10;
+    transition: all 0.8s ease;
+}
+
+.location-marker::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border: 3px solid #ef4444;
+    border-radius: 50%;
+    animation: pulse 1.3s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.7);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.location-label {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    background: #1e3a8a;
+    color: white;
+    padding: 7px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+    display: none;
+    z-index: 11;
+}
+
+        /* =========================
+           QUICK LINKS
+        ========================== */
+
+        .quick-links {
+            border-bottom: 1px solid #777;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .quick-links h3 {
+            color: #1e3a8a;
+        }
+
+        .quick-links a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .quick-links a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           ASIDE
+        ========================== */
+
+        aside h2 {
+            border-bottom: 1px solid #777;
+            padding-bottom: 10px;
+        }
+
+        aside ul {
+            padding-left: 20px;
+        }
+
+        aside li {
+            margin-bottom: 10px;
+        }
+
+
+        /* =========================
+           ANNOUNCEMENTS
+        ========================== */
+
+        #announcements {
+            background-color: #fff7ed;
+            border-left: 5px solid #f59e0b;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            border-top: 2px solid #2563eb;
+            background-color: #dbeafe;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            .browser-frame {
+                width: 100%;
+                margin: 0;
+            }
+
+            .content {
+                flex-direction: column;
+            }
+
+            main,
+            aside {
+                width: 100%;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            table {
+                font-size: 11px;
+            }
+
+            th,
+            td {
+                padding: 6px;
+            }
+
+            input[type="text"],
+            input[type="email"] {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="browser-frame">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+<header id="home">
+
+    <div class="header">
+
+        <!-- LEFT LOGO -->
+        <img
+            src="left.png.png"
+            alt="Talisay City College Logo"
+            class="header-logo"
+        >
+
+        <!-- TITLE -->
+        <div class="header-title">
+            <h1>📍 COLLEGE SECTION NAVIGATOR</h1>
+            <p>Your Smart Guide Around Campus</p>
+        </div>
+
+        <!-- RIGHT LOGO -->
+        <img
+            src="right.png.png"
+            alt="Talisay City College Logo"
+            class="header-logo"
+        >
+
+    </div>
+
+</header>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav>
+
+        <a href="#home" class="nav-link active">
+            HOME
+        </a>
+
+        <a href="#campus" class="nav-link">
+            CAMPUS
+        </a>
+
+        <a href="#map" class="nav-link">
+            MAP
+        </a>
+
+        <a href="#schedule" class="nav-link">
+            SCHEDULE
+        </a>
+
+        <a href="#contact" class="nav-link">
+            CONTACT
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         CONTENT
+    ========================== -->
+
+    <div class="content">
+
+
+        <!-- =========================
+             MAIN
+        ========================== -->
+
+        <main>
+
+
+            <!-- WELCOME -->
+            <section id="campus">
+
+                <h2>Welcome to Campus Navigator</h2>
+
+                <p>
+                    This system helps students, faculty, and visitors
+                    easily find buildings, classrooms, officers, and
+                    other campus facilities.
+                </p>
+
+                <p>
+                    It provides useful campus information such as
+                    class schedules, announcements, campus maps,
+                    and important student services.
+                </p>
+
+            </section>
+
+<!-- =========================
+     CLASS SCHEDULE
+========================= -->
+
+<article id="schedule">
+
+    <h2>Class Schedule</h2>
+
+    <!-- SECTION SELECTOR -->
+    <label for="sectionSelector">
+        <b>Select Section:</b>
+    </label>
+
+    <select id="sectionSelector"
+        style="padding:10px; width:250px; margin:10px 0 20px 10px; border:1px solid #777; border-radius:5px;">
+
+        <option value="helpful">Helpful</option>
+        <option value="jubilant">Jubilant</option>
+        <option value="kindful">Kindful</option>
+        <option value="brilliant">Brilliant</option>
+        <option value="beautiful">Beautiful</option>
+        <option value="lucky">Lucky</option>
+        <option value="fearless">Fearless</option>
+
+    </select>
+
+
+    <!-- =====================================================
+         HELPFUL
+    ====================================================== -->
+
+   <div class="schedule-section" id="schedule-helpful">
+        <table>
+
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Wednesday</th>
+                <th>Friday</th>
+            </tr>
+
+            <tr>
+                <td class="time-column">7:30 - 9:00 AM</td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-201</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-201</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-202</small>
+                    <br><br>
+                    <small>8:00 - 10:30 AM</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">9:00 - 10:30 AM</td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-202</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-201</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-202</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">10:30 AM - 12:00 PM</td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-202</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-203</small>
+                </td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Ms. Larobis</span><br>
+                    <small>Room: B-204</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>12:00 - 12:30 PM</td>
+                <td colspan="3">HEALTH BREAK</td>
+            </tr>
+
+            <tr>
+                <td class="time-column">12:30 - 2:00 PM</td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-203</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-202</small>
+                    <br><br>
+                    <small>12:30 - 2:30 PM</small>
+                </td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-204</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">2:00 - 3:30 PM</td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-203</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-202</small>
+                    <br><br>
+                    <small>Until 2:30 PM</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-205</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">3:30 - 5:00 PM</td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-205</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1 with<br>
+                    Intellectual Property Rights<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-202</small>
+                    <br><br>
+                    <small>2:30 - 5:00 PM</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-203</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>5:00 - 5:30 PM</td>
+                <td colspan="3">CLEARING TIME</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================================
+         JUBILANT
+    ====================================================== -->
+
+ <div class="schedule-section" id="schedule-jubilant" style="display:none;">
+
+        
+        <table>
+
+            <tr>
+                <th>Time</th>
+                <th>Tuesday</th>
+                <th>Thursday</th>
+                <th>Saturday</th>
+            </tr>
+
+            <tr>
+                <td class="time-column">7:30 - 9:00 AM</td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-203</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-204</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-204</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">9:00 - 10:30 AM</td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-201</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-203</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-205</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">10:30 AM - 12:00 PM</td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-202</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-206</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-204</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>12:00 - 12:30 PM</td>
+                <td colspan="3">HEALTH BREAK</td>
+            </tr>
+
+            <tr>
+                <td class="time-column">12:30 - 2:00 PM</td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-204</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-205</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-201</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">2:00 - 3:30 PM</td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-204</small>
+                </td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-202</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-206</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">3:30 - 5:00 PM</td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1 with<br>
+                    Intellectual Property Rights<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-205</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-204</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-203</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>5:00 - 5:30 PM</td>
+                <td colspan="3">CLEARING TIME</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================================
+         KINDful
+    ====================================================== -->
+
+ <div class="schedule-section" id="schedule-kindful" style="display:none;">
+        <table>
+
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Wednesday</th>
+                <th>Friday</th>
+            </tr>
+
+            <tr>
+                <td class="time-column">7:30 - 9:00 AM</td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-205</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-205</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-206</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">9:00 - 10:30 AM</td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-207</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-206</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-208</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">10:30 AM - 12:00 PM</td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-206</small>
+                </td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-209</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-205</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>12:00 - 12:30 PM</td>
+                <td colspan="3">HEALTH BREAK</td>
+            </tr>
+
+            <tr>
+                <td class="time-column">12:30 - 2:00 PM</td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-206</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-208</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-205</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">2:00 - 3:30 PM</td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-209</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-206</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-207</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">3:30 - 5:00 PM</td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-205</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-205</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1 with<br>
+                    Intellectual Property Rights<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-206</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>5:00 - 5:30 PM</td>
+                <td colspan="3">CLEARING TIME</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================================
+         BRILLIANT
+    ====================================================== -->
+
+<div class="schedule-section" id="schedule-brilliant" style="display:none;">
+        <table>
+
+            <tr>
+                <th>Time</th>
+                <th>Tuesday</th>
+                <th>Thursday</th>
+                <th>Saturday</th>
+            </tr>
+
+            <tr>
+                <td class="time-column">7:30 - 9:00 AM</td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-207</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-208</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-210</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">9:00 - 10:30 AM</td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-207</small>
+                </td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-211</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-208</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">10:30 AM - 12:00 PM</td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-208</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-212</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-207</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>12:00 - 12:30 PM</td>
+                <td colspan="3">HEALTH BREAK</td>
+            </tr>
+
+            <tr>
+                <td class="time-column">12:30 - 2:00 PM</td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-208</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-210</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-207</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">2:00 - 3:30 PM</td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-212</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-207</small>
+                </td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-211</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">3:30 - 5:00 PM</td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-211</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1 with<br>
+                    Intellectual Property Rights<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-208</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-208</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>5:00 - 5:30 PM</td>
+                <td colspan="3">CLEARING TIME</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================================
+         BEAUTIFUL
+    ====================================================== -->
+
+ <div class="schedule-section" id="schedule-beautiful" style="display:none;">
+      
+        <table>
+
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Wednesday</th>
+                <th>Friday</th>
+            </tr>
+
+            <tr>
+                <td class="time-column">7:30 - 9:00 AM</td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-213</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-209</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-209</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">9:00 - 10:30 AM</td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-210</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-210</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-214</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">10:30 AM - 12:00 PM</td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-215</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-210</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-209</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>12:00 - 12:30 PM</td>
+                <td colspan="3">HEALTH BREAK</td>
+            </tr>
+
+            <tr>
+                <td class="time-column">12:30 - 2:00 PM</td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-209</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-213</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-210</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">2:00 - 3:30 PM</td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-209</small>
+                </td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-215</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-210</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">3:30 - 5:00 PM</td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-214</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-209</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1 with<br>
+                    Intellectual Property Rights<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-210</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>5:00 - 5:30 PM</td>
+                <td colspan="3">CLEARING TIME</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================================
+         LUCKY
+    ====================================================== -->
+<div class="schedule-section" id="schedule-lucky" style="display:none;">
+
+        <table>
+
+            <tr>
+                <th>Time</th>
+                <th>Tuesday</th>
+                <th>Thursday</th>
+                <th>Saturday</th>
+            </tr>
+
+            <tr>
+                <td class="time-column">7:30 - 9:00 AM</td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-211</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-216</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-211</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">9:00 - 10:30 AM</td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-212</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-212</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-217</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">10:30 AM - 12:00 PM</td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-218</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-211</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-212</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>12:00 - 12:30 PM</td>
+                <td colspan="3">HEALTH BREAK</td>
+            </tr>
+
+            <tr>
+                <td class="time-column">12:30 - 2:00 PM</td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-217</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-211</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-212</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">2:00 - 3:30 PM</td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-212</small>
+                </td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-218</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-216</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">3:30 - 5:00 PM</td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-211</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1 with<br>
+                    Intellectual Property Rights<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-212</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-211</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>5:00 - 5:30 PM</td>
+                <td colspan="3">CLEARING TIME</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================================
+         FEARLESS
+    ====================================================== -->
+
+  <div class="schedule-section" id="schedule-fearless" style="display:none;">
+        
+        <table>
+
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Wednesday</th>
+                <th>Friday</th>
+            </tr>
+
+            <tr>
+                <td class="time-column">7:30 - 9:00 AM</td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-213</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-219</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-214</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">9:00 - 10:30 AM</td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-213</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-213</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-214</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">10:30 AM - 12:00 PM</td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-220</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-214</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-221</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>12:00 - 12:30 PM</td>
+                <td colspan="3">HEALTH BREAK</td>
+            </tr>
+
+            <tr>
+                <td class="time-column">12:30 - 2:00 PM</td>
+
+                <td>
+                    <span class="subject">TAC 6</span><br>
+                    Industrial Organization<br>
+                    and Management<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: B-221</small>
+                </td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-214</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-213</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">2:00 - 3:30 PM</td>
+
+                <td>
+                    <span class="subject">COMP 312</span><br>
+                    Web Development<br>
+                    <span class="teacher">Mr. Canillas</span><br>
+                    <small>Room: C-214</small>
+                </td>
+
+                <td>
+                    <span class="subject">PPC ELEC</span><br>
+                    Philippine Popular Culture<br>
+                    <span class="teacher">Mrs. Larobis</span><br>
+                    <small>Room: B-220</small>
+                </td>
+
+                <td>
+                    <span class="subject">TAC 7</span><br>
+                    Industrial Psychology<br>
+                    <span class="teacher">Mrs. Jerusalem</span><br>
+                    <small>Room: B-219</small>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="time-column">3:30 - 5:00 PM</td>
+
+                <td>
+                    <span class="subject">GE US</span><br>
+                    Understanding the Self<br>
+                    <span class="teacher">Ms. Padin</span><br>
+                    <small>Room: A-214</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 313</span><br>
+                    Project Study 1 with<br>
+                    Intellectual Property Rights<br>
+                    <span class="teacher">Ms. Cabanes</span><br>
+                    <small>Room: A-213</small>
+                </td>
+
+                <td>
+                    <span class="subject">COMP 311</span><br>
+                    Networking<br>
+                    <span class="teacher">Mr. Mancio</span><br>
+                    <small>Room: C-213</small>
+                </td>
+            </tr>
+
+            <tr class="break-row">
+                <td>5:00 - 5:30 PM</td>
+                <td colspan="3">CLEARING TIME</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</article>
+   
+<!-- =========================
+     CAMPUS LOCATION SEARCH
+========================= -->
+
+<form id="searchForm">
+
+    <h2>Search for a Place</h2>
+
+    <div class="map-search">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search Building"
+        >
+
+        <button type="submit">
+            🔎 Find Location
+        </button>
+
+    </div>
+
+    <div id="searchResult" class="search-result"></div>
+
+</form>
+
+
+<!-- =========================
+     CAMPUS MAP
+========================= -->
+
+<div class="map" id="map">
+
+    <h2>Campus Map</h2>
+
+    <div class="campus-map-view">
+
+        <div class="campus-map-image" id="campusMap">
+
+            <img
+                src="campus-map.png"
+                alt="Talisay City College Campus Map"
+                id="campusMapImage"
+            >
+
+            <div
+                class="location-marker"
+                id="locationMarker">
+            </div>
+
+            <div
+                class="location-label"
+                id="locationLabel">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+        </main>
+
+
+
+        <!-- =========================
+             SIDE BAR
+        ========================== -->
+
+        <aside>
+
+
+            <!-- QUICK LINKS -->
+
+            <div class="quick-links">
+
+                <h3>QUICK LINKS</h3>
+
+                <ul>
+
+                    <li>
+                        <a href="calendar.html">
+                                Academic Calendar
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="announcement.html">
+                            Announcements
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- UPCOMING EVENTS -->
+
+            <h2>
+                Upcoming Events
+            </h2>
+
+            <ul>
+
+                <li>
+                    Foundation Day
+                    <br>
+                    Sept. 10, 2026
+                </li>
+
+                <li>
+                    Intramurals
+                    <br>
+                    Sept. 20-25, 2026
+                </li>
+
+            </ul>
+
+            <!-- FAQ -->
+
+           <section id="faqs">
+
+    <h2>FAQs</h2>
+
+    <p>
+        <b>How can I find a room?</b><br>
+        Use the search box or check the campus map
+        to locate buildings, classrooms, and other facilities.
+    </p>
+
+    <p>
+        <b>How do I search for a location?</b><br>
+        Enter the name of the building, office, room,
+        or facility in the search box and click
+        “Find Location.”
+    </p>
+
+    <p>
+        <b>Where can I find the Administration Building?</b><br>
+        The Administration Building is located near
+        the center of the campus. It includes offices
+        such as the Registrar, SAS Coordinator,
+        Scholarship, and other administrative offices.
+    </p>
+
+    <p>
+        <b>Where can I find the HM Building?</b><br>
+        Use the campus map and search for
+        “HM Building” to locate it quickly.
+    </p>
+
+    <p>
+        <b>Where can I find the Gym and Sports Court?</b><br>
+        Both facilities are shown on the campus map
+        and can be located using the search feature.
+    </p>
+
+    <p>
+        <b>Where can I see announcements?</b><br>
+        Visit the Announcements page through the
+        Quick Links section for school updates and events.
+    </p>
+
+    <p>
+        <b>What if my location cannot be found?</b><br>
+        Check the spelling of your search and try
+        using a shorter location name.
+    </p>
+
+    <p>
+        <b>Who can use the Campus Navigator?</b><br>
+        The Campus Navigator can be used by students,
+        faculty, staff, and visitors.
+    </p>
+
+    <p>
+        <b>Can I use the map on my phone?</b><br>
+        Yes. The campus page is designed to adjust
+        to smaller screens such as mobile phones and tablets.
+    </p>
+
+    <p>
+        <b>What information can I find?</b><br>
+        You can find campus locations, buildings,
+        offices, facilities, class schedules, and
+        other important campus information.
+    </p>
+
+    <p>
+    <b>What should I do if I need assistance?</b><br>
+    You may visit the appropriate office or ask
+    the assigned staff for help with your concern.
+</p>
+
+ <p>
+    <b>Where can I ask for help if I have a school concern?</b><br>
+  You can approach the appropriate school office or staff member for assistance.
+</p>
+
+</section>
+
+
+
+            <!-- SUBSCRIBE -->
+
+            <form id="contact">
+
+                <h2>
+                    Subscribe to Updates
+                </h2>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your Email"
+                    required
+                >
+
+                <input
+                    type="submit"
+                    value="Subscribe"
+                >
+<div class="sidebar-box">
+    <h3>📞 Contact</h3>
+
+    <p>For questions or concerns, you may contact us at:</p>
+  <h6>talisaycitycollege@gmail.com</h6>
+</div>
+            </form>
+
+        </aside>
+
+    </div>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        © 2026 College Campus Navigator
+        | All Rights Reserved
+
+        <br><br>
+
+        Follow Us:
+        Facebook | Instagram | YouTube
+
+    </footer>
+
+</div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script>
+
+/* =========================
+   SECTION SCHEDULE SELECTOR
+========================= */
+
+const sectionSelector = 
+    document.getElementById("sectionSelector");
+
+const scheduleSections = 
+    document.querySelectorAll(".schedule-section");
+
+
+function showSelectedSchedule() {
+
+    const selectedSection = 
+        sectionSelector.value;
+
+
+    // Hide all schedules
+    scheduleSections.forEach(function(schedule) {
+
+        schedule.style.display = "none";
+
+    });
+
+
+    // Show selected schedule
+    const selectedSchedule = 
+        document.getElementById(
+            "schedule-" + selectedSection
+        );
+
+
+    if (selectedSchedule) {
+
+        selectedSchedule.style.display = "block";
+
+    }
+
+}
+
+
+// Show Helpful when page first opens
+showSelectedSchedule();
+
+
+// Change schedule when section is selected
+sectionSelector.addEventListener(
+    "change",
+    showSelectedSchedule
+);
+
+/* =========================
+   CAMPUS LOCATION TRACKER
+========================= */
+
+const campusLocations = {
+
+    "canteen": {
+        name: "Canteen",
+        x: 8,
+        y: 16
+    },
+
+    "library": {
+        name: "Library / Building B",
+        x: 18,
+        y: 18
+    },
+
+    "building b": {
+        name: "Library / Building B",
+        x: 18,
+        y: 18
+    },
+
+    "building c": {
+        name: "Building C",
+        x: 44,
+        y: 17
+    },
+
+    "building d": {
+        name: "Building D",
+        x: 64,
+        y: 17
+    },
+
+    "cr": {
+        name: "CR / Restroom",
+        x: 85,
+        y: 16
+    },
+
+    "gym": {
+        name: "Gym",
+        x: 12,
+        y: 36
+    },
+
+    "sports court": {
+        name: "Sports Court",
+        x: 12,
+        y: 54
+    },
+
+    "church": {
+        name: "Church",
+        x: 12,
+        y: 72
+    },
+
+    "administration": {
+        name: "Administration Building",
+        x: 43,
+        y: 50
+    },
+
+    "admin": {
+        name: "Administration Building",
+        x: 43,
+        y: 50
+    },
+
+    "building a": {
+        name: "Building A",
+        x: 70,
+        y: 51
+    },
+
+    "hm building": {
+        name: "HM Building",
+        x: 75,
+        y: 73
+    },
+
+    "it office": {
+        name: "IT Office — HM Building",
+        x: 75,
+        y: 78
+    },
+
+    "indtech office": {
+        name: "IT Office — HM Building",
+        x: 75,
+        y: 78
+    },
+
+    "indtech": {
+        name: "IT Office — HM Building",
+        x: 75,
+        y: 78
+    },
+
+    "registrar": {
+        name: "Registrar — Administration Building",
+        x: 39,
+        y: 54
+    },
+
+    "dean office": {
+        name: "Dean's Office — Administration Building",
+        x: 52,
+        y: 54
+    },
+
+    "scholarship": {
+        name: "Scholarship — Administration Building",
+        x: 40,
+        y: 57
+    },
+
+    "student lounge": {
+        name: "Student Lounge",
+        x: 65,
+        y: 34
+    },
+
+    "main gate": {
+        name: "Main Gate",
+        x: 43,
+        y: 91
+    }
+
+};
+
+
+document
+    .getElementById("searchForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const searchInput =
+            document
+            .getElementById("searchInput")
+            .value
+            .trim()
+            .toLowerCase();
+
+        const result =
+            document.getElementById("searchResult");
+
+        const marker =
+            document.getElementById("locationMarker");
+
+        const label =
+            document.getElementById("locationLabel");
+
+        const mapImage =
+            document.getElementById("campusMapImage");
+
+
+        if (searchInput === "") {
+
+            result.className = "search-result error";
+
+            result.textContent =
+                "Please enter a location.";
+
+            marker.style.display = "none";
+            label.style.display = "none";
+
+            mapImage.style.transform =
+                "scale(1)";
+
+            return;
+        }
+
+
+        let location = null;
+
+
+        /* EXACT MATCH */
+
+        if (campusLocations[searchInput]) {
+
+            location =
+                campusLocations[searchInput];
+
+        }
+
+
+        /* PARTIAL SEARCH */
+
+        else {
+
+            const key =
+                Object.keys(campusLocations)
+                .find(function(item) {
+
+                    return item.includes(searchInput);
+
+                });
+
+            if (key) {
+
+                location =
+                    campusLocations[key];
+
+            }
+
+        }
+
+
+        /* LOCATION FOUND */
+
+        if (location) {
+
+            result.className =
+                "search-result success";
+
+            result.textContent =
+                "📍 Location found: " +
+                location.name;
+
+
+            marker.style.left =
+                location.x + "%";
+
+            marker.style.top =
+                location.y + "%";
+
+            label.style.left =
+                location.x + "%";
+
+            label.style.top =
+                location.y + "%";
+
+            label.textContent =
+                location.name;
+
+
+            marker.style.display =
+                "block";
+
+            label.style.display =
+                "block";
+
+
+            /* ZOOM */
+
+            mapImage.style.transform =
+                "scale(1.9)";
+
+
+            /* MOVE MAP TOWARD LOCATION */
+
+            const moveX =
+                (50 - location.x) * 0.9;
+
+            const moveY =
+                (50 - location.y) * 0.9;
+
+            mapImage.style.transformOrigin =
+                location.x + "% " +
+                location.y + "%";
+
+
+            setTimeout(function() {
+
+                mapImage.style.transform =
+                    "scale(1.9)";
+
+            }, 50);
+
+        }
+
+
+        /* LOCATION NOT FOUND */
+
+        else {
+
+            result.className =
+                "search-result error";
+
+            result.textContent =
+                "❌ Location not found. Please try another location.";
+
+            marker.style.display =
+                "none";
+
+            label.style.display =
+                "none";
+
+            mapImage.style.transform =
+                "scale(1)";
+
+        }
+
+    });
+
+    document
+        .getElementById("contact")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+                let email =
+                    document
+                    .getElementById("email")
+                    .value;
+
+                alert(
+                    "Thank you! " +
+                    email +
+                    " has been subscribed to campus updates."
+                );
+
+            }
+        );
+
+
+
+    /* =========================
+       NAVIGATION TRACKING
+    ========================== */
+
+    const sections =
+        document.querySelectorAll(
+            "main section, main article, .map"
+        );
+
+    const navLinks =
+        document.querySelectorAll(
+            ".nav-link"
+        );
+
+
+    window.addEventListener(
+        "scroll",
+        function() {
+
+            let current = "";
+
+            sections.forEach(
+                function(section) {
+
+                    const sectionTop =
+                        section.offsetTop - 120;
+
+                    if (
+                        window.scrollY >=
+                        sectionTop
+                    ) {
+
+                        current =
+                            section.getAttribute(
+                                "id"
+                            );
+
+                    }
+
+                }
+            );
+
+
+            navLinks.forEach(
+                function(link) {
+
+                    link.classList.remove(
+                        "active"
+                    );
+
+                    if (
+                        link.getAttribute("href") ===
+                        "#" + current
+                    ) {
+
+                        link.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+</script>
+
+</body>
+
+</html>
